@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7575976B2A28B95100B675A0 /* MainTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7575976A2A28B95100B675A0 /* MainTabbarViewController.swift */; };
+		7575976D2A28B99000B675A0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7575976C2A28B99000B675A0 /* ProfileViewController.swift */; };
+		7575976F2A28BADC00B675A0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7575976E2A28BADC00B675A0 /* SearchViewController.swift */; };
+		757597722A28BC3200B675A0 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757597712A28BC3200B675A0 /* HomeTableViewCell.swift */; };
 		75B5839C2A27F62300BF7A69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B5839B2A27F62300BF7A69 /* AppDelegate.swift */; };
 		75B5839E2A27F62300BF7A69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B5839D2A27F62300BF7A69 /* SceneDelegate.swift */; };
-		75B583A02A27F62300BF7A69 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B5839F2A27F62300BF7A69 /* ViewController.swift */; };
+		75B583A02A27F62300BF7A69 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B5839F2A27F62300BF7A69 /* HomeViewController.swift */; };
 		75B583A52A27F62300BF7A69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75B583A42A27F62300BF7A69 /* Assets.xcassets */; };
 		75B583A82A27F62300BF7A69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B583A62A27F62300BF7A69 /* LaunchScreen.storyboard */; };
 		75B583B12A27F77900BF7A69 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 75B583B02A27F77900BF7A69 /* Alamofire */; };
@@ -18,10 +22,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7575976A2A28B95100B675A0 /* MainTabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarViewController.swift; sourceTree = "<group>"; };
+		7575976C2A28B99000B675A0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7575976E2A28BADC00B675A0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		757597712A28BC3200B675A0 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		75B583982A27F62300BF7A69 /* RickAndMortyAlamofire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyAlamofire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75B5839B2A27F62300BF7A69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75B5839D2A27F62300BF7A69 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		75B5839F2A27F62300BF7A69 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		75B5839F2A27F62300BF7A69 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		75B583A42A27F62300BF7A69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75B583A72A27F62300BF7A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75B583A92A27F62300BF7A69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -41,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		757597702A28BC1300B675A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				757597712A28BC3200B675A0 /* HomeTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		75B5838F2A27F62200BF7A69 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +78,7 @@
 			children = (
 				75B5839B2A27F62300BF7A69 /* AppDelegate.swift */,
 				75B5839D2A27F62300BF7A69 /* SceneDelegate.swift */,
+				757597702A28BC1300B675A0 /* Views */,
 				75B583B52A27F7B200BF7A69 /* ViewControllers */,
 				75B583B22A27F79E00BF7A69 /* Managers */,
 				75B583B62A27FB3000BF7A69 /* Helpers */,
@@ -83,7 +100,10 @@
 		75B583B52A27F7B200BF7A69 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				75B5839F2A27F62300BF7A69 /* ViewController.swift */,
+				7575976A2A28B95100B675A0 /* MainTabbarViewController.swift */,
+				75B5839F2A27F62300BF7A69 /* HomeViewController.swift */,
+				7575976C2A28B99000B675A0 /* ProfileViewController.swift */,
+				7575976E2A28BADC00B675A0 /* SearchViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -173,8 +193,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				75B583B82A27FB3800BF7A69 /* Constants.swift in Sources */,
-				75B583A02A27F62300BF7A69 /* ViewController.swift in Sources */,
+				75B583A02A27F62300BF7A69 /* HomeViewController.swift in Sources */,
+				7575976F2A28BADC00B675A0 /* SearchViewController.swift in Sources */,
 				75B5839C2A27F62300BF7A69 /* AppDelegate.swift in Sources */,
+				7575976B2A28B95100B675A0 /* MainTabbarViewController.swift in Sources */,
+				7575976D2A28B99000B675A0 /* ProfileViewController.swift in Sources */,
+				757597722A28BC3200B675A0 /* HomeTableViewCell.swift in Sources */,
 				75B5839E2A27F62300BF7A69 /* SceneDelegate.swift in Sources */,
 				75B583B42A27F7AE00BF7A69 /* APIHandler.swift in Sources */,
 			);
