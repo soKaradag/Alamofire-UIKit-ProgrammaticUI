@@ -9,44 +9,66 @@ import UIKit
 
 class HomeViewController: UIViewController {
     private let apiHandler = APIHandler()
+    private var persons: [Person] = []
 
-    
     private let homeViewTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.translatesAutoresizingMaskIntoConstraints = false
-        table.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier)
         return table
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
+
+        view.addSubview(homeViewTable)
+
         homeViewTable.dataSource = self
         homeViewTable.delegate = self
         
-        apiHandler.fetchData { fetchedPersons, error in
+        homeViewTable.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.identifier)
+
+        apiHandler.fetchData { [weak self] fetchedPersons, error in
             if let error = error {
                 print("Error fetching data: \(error.localizedDescription)")
             } else if let persons = fetchedPersons {
-                print(persons[0])
+                self?.persons = persons
+                DispatchQueue.main.async {
+                    self?.homeViewTable.reloadData()
+                }
             }
         }
 
-        
+        addConstraints()
     }
 
+    private func addConstraints() {
+        let tableViewConstraints = [
+            homeViewTable.topAnchor.constraint(equalTo: view.topAnchor),
+            homeViewTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            homeViewTable.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            homeViewTable.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(tableViewConstraints)
+    }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        print(persons.count)
+        return persons.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as? HomeTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.configure(with: persons[indexPath.row])
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
 }
