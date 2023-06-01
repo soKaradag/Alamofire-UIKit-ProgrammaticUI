@@ -10,6 +10,7 @@ import UIKit
 class HomeTableViewCell: UITableViewCell {
     static let identifier = "HomeTableViewCell"
     
+    
     private let heroImage: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
