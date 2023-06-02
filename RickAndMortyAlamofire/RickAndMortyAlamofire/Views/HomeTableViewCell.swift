@@ -13,12 +13,14 @@ class HomeTableViewCell: UITableViewCell {
     private let heroName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.tintColor = .label
         return label
     }()
     
     private let heroGender: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.tintColor = .label
         return label
     }()
     
@@ -32,15 +34,10 @@ class HomeTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         contentView.addSubview(heroName)
         contentView.addSubview(heroGender)
         contentView.addSubview(heroImage)
-        
-        heroName.textColor = .black
-        heroName.backgroundColor = .white
-        
-        heroGender.textColor = .black
-        heroGender.backgroundColor = .white
         
         addConstraints()
     }

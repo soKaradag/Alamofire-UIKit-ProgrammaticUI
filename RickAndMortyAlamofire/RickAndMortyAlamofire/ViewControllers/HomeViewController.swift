@@ -20,8 +20,11 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-
         view.addSubview(homeViewTable)
+        
+        self.title = "Characters"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
 
         homeViewTable.dataSource = self
         homeViewTable.delegate = self
