@@ -8,5 +8,14 @@
 import Foundation
 
 class Constants {
-    static let baseURL = "https://rickandmortyapi.com/api/character"
+    static var baseURL: String {
+        return "https://rickandmortyapi.com/api/character/"
+    }
+    
+    static func characterURL(forPage page: Int) -> URL? {
+        var urlComponents = URLComponents(string: baseURL)
+        let pageQueryItem = URLQueryItem(name: "page", value: "\(page)")
+        urlComponents?.queryItems = [pageQueryItem]
+        return urlComponents?.url
+    }
 }

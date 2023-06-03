@@ -24,11 +24,11 @@ class HomeTableViewCell: UITableViewCell {
         return label
     }()
     
-    
     private let heroImage: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         return imageView
     }()
     
@@ -38,16 +38,16 @@ class HomeTableViewCell: UITableViewCell {
         contentView.addSubview(heroName)
         contentView.addSubview(heroGender)
         contentView.addSubview(heroImage)
-        
+
         addConstraints()
     }
     
     private func addConstraints() {
         let heroImageViewConstraints = [
-            heroImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            heroImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            heroImage.widthAnchor.constraint(equalToConstant: 100),
-            heroImage.heightAnchor.constraint(equalToConstant: 100)
+            heroImage.topAnchor.constraint(equalTo: contentView.topAnchor),
+            heroImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            heroImage.widthAnchor.constraint(equalTo: heroImage.heightAnchor),
+            heroImage.heightAnchor.constraint(equalTo: contentView.heightAnchor)
         ]
         let heroNameConstraints = [
             heroName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
@@ -66,6 +66,17 @@ class HomeTableViewCell: UITableViewCell {
     func configure(with person: Person) {
         heroName.text = person.name
         heroGender.text = person.gender
+        
+        if let imageURL = URL(string: person.image) {
+            DispatchQueue.global().async {
+                if let imageData = try? Data(contentsOf: imageURL) {
+                    DispatchQueue.main.async {
+                        let image = UIImage(data: imageData)
+                        self.heroImage.image = image
+                    }
+                }
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -73,3 +84,4 @@ class HomeTableViewCell: UITableViewCell {
     }
     
 }
+

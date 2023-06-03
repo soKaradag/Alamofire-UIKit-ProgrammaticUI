@@ -8,7 +8,9 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    private let apiHandler = APIHandler()
+    var currentPage = 38
+    
+    private let apiHandler = APIHandler.shared
     private var persons: [Person] = []
 
     private let homeViewTable: UITableView = {
@@ -30,7 +32,7 @@ class HomeViewController: UIViewController {
         homeViewTable.delegate = self
         
         homeViewTable.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.identifier)
-
+        
         apiHandler.fetchData { [weak self] fetchedPersons, error in
             if let error = error {
                 print("Error fetching data: \(error.localizedDescription)")
@@ -41,9 +43,66 @@ class HomeViewController: UIViewController {
                 }
             }
         }
+        
+        performAPIRequest()
 
         addConstraints()
+        configureNavBar()
     }
+    
+    func performAPIRequest() {
+          guard let url = Constants.characterURL(forPage: currentPage) else {
+              return
+          }
+          
+          let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+              if let error = error {
+                  print("Error: \(error.localizedDescription)")
+                  return
+              }
+              
+              if let data = data {
+                  do {
+                      let decoder = JSONDecoder()
+                      let apiResponse = try decoder.decode(PersonResponse.self, from: data)
+                      let fetchedPersons = apiResponse.results
+                      
+                      // Update the persons array with the fetched data
+                      self?.persons = fetchedPersons
+                      
+                      DispatchQueue.main.async {
+                          // Reload the table view with the updated data on the main queue
+                          self?.homeViewTable.reloadData()
+                      }
+                  } catch {
+                      print("Error decoding API response: \(error.localizedDescription)")
+                  }
+              }
+          }
+          
+          task.resume()
+      }
+    
+    @objc func previousButtonTapped() {
+        if currentPage > 1 {
+            currentPage -= 1
+            performAPIRequest()
+        }
+    }
+    
+    @objc func nextButtonTapped() {
+        currentPage += 1
+        performAPIRequest()
+    }
+    
+    private func configureNavBar() {
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(image: UIImage(systemName: "plus.circle"), style: .done, target: self , action: #selector(nextButtonTapped)),
+            UIBarButtonItem(image: UIImage(systemName: "minus.circle"), style: .done, target: self , action: #selector(previousButtonTapped))
+        ]
+    }
+    
+
 
     private func addConstraints() {
         let tableViewConstraints = [
@@ -72,6 +131,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        let screenHeight = UIScreen.main.bounds.height
+        let rowHeight = screenHeight * 0.1
+        return rowHeight
     }
+
 }

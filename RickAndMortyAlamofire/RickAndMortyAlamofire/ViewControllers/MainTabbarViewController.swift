@@ -20,6 +20,9 @@ class MainTabbarViewController: UITabBarController {
         vc2.tabBarItem.image = UIImage(systemName: "person")
         vc3.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         
+        vc1.title = "Characters"
+        vc2.title = "Profile"
+        
         tabBar.tintColor = .label
         
         setViewControllers([vc1,vc2,vc3], animated: true)

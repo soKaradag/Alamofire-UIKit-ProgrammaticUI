@@ -9,6 +9,11 @@ import Foundation
 import Alamofire
 
 class APIHandler {
+    
+    static let shared = APIHandler()
+
+    private init() {}
+    
     func fetchData(completion: @escaping ([Person]?, Error?) -> Void) {
         AF.request(Constants.baseURL, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).responseData { response in
             if let data = response.data {
